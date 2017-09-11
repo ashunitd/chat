@@ -1,0 +1,20 @@
+{
+  "name": "own",
+  "version": "1.0.0",
+  "description": "chat site for college students",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "Ashutosh Ranjan Renu",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.17.2",
+    "express": "^4.15.4",
+    "jsonwebtoken": "^8.0.0",
+    "mongoose": "4.1.9",
+    "morgan": "^1.8.2",
+    "socket.io": "^2.0.3"
+  }
+}

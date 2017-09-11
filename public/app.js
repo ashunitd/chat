@@ -1,0 +1,1 @@
+angular.module('chatApp',['appRoutes','chatController','userCtrl','userCntrl','onetoonecontroller','userService'])

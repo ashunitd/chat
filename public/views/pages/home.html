@@ -1,0 +1,32 @@
+<div ng-controller="userController as user"><input type="text" ng-model="user.username" name="username"><button ng-click="user.createUser(user.username)">Submit</button>
+
+<li ng-repeat="username in user.usernames"><a href="#" ng-click="user.getUser(username.id)">{{username.username}}</a></li>
+
+</div>
+
+
+<div ng-controller="chatCtrl as chat">
+	<h3>Class ChatRoom</h3>
+	<ul>
+		<li ng-repeat="message in chat.messages track by $index"><strong>{{message.username}}:</strong><span>{{message.message}}</span></strong><span>{{message.id}}</span></li>
+
+		
+
+
+	</ul>
+<input type="text"  ng-model="chat.newMessage"><button ng-click="chat.sendMessage()">send</button>
+</div>
+
+<hr>
+
+<div ng-controller="oneCtrl as one">
+	<h3>Class ChatRoom</h3>
+	<ul>
+		<li ng-repeat="var in one.msgs track by $index"><strong>{{var.username}}:</strong><span>{{var.msg}}</span></strong></li>
+
+		
+
+
+	</ul>
+<input type="text"  ng-model="one.donewMessage"><button ng-click="one.doMessage()">send</button>
+</div>
