@@ -23,7 +23,7 @@ socket.on('usernames',function(username){
 
 vm.username=undefined;
 vm.createUser=function(username){
-	
+	console.log(username);
 	$rootScope.$broadcast('new-user',username);
 }
 

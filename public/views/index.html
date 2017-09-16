@@ -8,7 +8,12 @@
 
 
 </head>
-<body>
+<body ng-controller="loginCtrl as main">
+<div class="container"  ng-if="main.loggedIn">
+
+<li><a href="#" ng-click="main.doLogout()">Logout</a><a href="#">Hello {{ main.user.firstname }}</a></li>
+
+</div>	
 <main class="container">
 	<div ng-view></div>
 </main>
@@ -22,6 +27,7 @@
 
 <!-- services -->
 <script type="text/javascript" src="/views/services/userService.js"></script>
+<script type="text/javascript" src="/views/services/loginService.js"></script>
 <!-- controller -->
 
 <script type="text/javascript" src="../app.js"></script>
@@ -29,7 +35,8 @@
 <script type="text/javascript" src="/views/controllers/userCtrl.js"></script>
 <script type="text/javascript" src="/views/controllers/chatcontroller.js"></script>
 <script type="text/javascript" src="/views/controllers/usercontroller.js"></script>
+<script type="text/javascript" src="/views/controllers/loginController.js"></script>
 <script type="text/javascript" src="/views/controllers/onetoonecontroller.js"></script>
-
+<script type="text/javascript" src="/views/js/login_register.js"></script>
 </body>
 </html>

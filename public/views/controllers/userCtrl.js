@@ -5,7 +5,7 @@ angular.module('userCntrl',[])
 	vm=this;
 
 	vm.signupUser=function(){
-		console.log("hello");
+		
 		vm.message='';
 		User.create(vm.userData)
 			.then(function(response){

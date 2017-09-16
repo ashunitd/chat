@@ -59,13 +59,17 @@ module.exports=function(app,express){
 	});
 
 	api.post('/login',function(req,res){
+		
 		User.findOne({ email:req.body.email
-		}).select('firstname lastname email email password').exec(function(err,user){
+		}).select('firstname lastname email phone password').exec(function(err,user){
 			if(err)throw err;
 			if(!user){
+
 				res.send({message:"User Doesn't exist"});
 			}else if(user){
-				var validPassword=user.comparePassword(req.body.password);
+				password=req.body.password;
+				var validPassword=user.comparePassword(password);
+
 				if(!validPassword){
 					res.send({message:"invalid password"})
 				}else{
@@ -85,6 +89,7 @@ module.exports=function(app,express){
 		console.log('somebody just come to our app');
 		var token = req.body.token || req.param.token || req.headers['x-access-token'];
 		
+		
 		if(token){
 
 			jsonwebtoken.verify(token,secretkey,function(err,decoded){
@@ -92,45 +97,46 @@ module.exports=function(app,express){
 					res.status(403).send({success:false,message:"failed to authenticate user"});
 
 				}else{
-					console.log("hello");
+					
 					req.decoded=decoded;
 					next();
 				}
 			});
 		}else{
+			
 			res.status(403).send({success:false,message:'no token provided'});
 		}
 	});
 
-	api.route('/')
-		.post(function(req,res){
-			//console.log("hello");
-			var story= new Story({
-				creator:req.decoded.id,
-				content:req.body.content
-			});
-			story.save(function(err,newStory){
-				if(err){
-					res.send(err);
-					return;
+	// api.route('/')
+	// 	.post(function(req,res){
+	// 		//console.log("hello");
+	// 		var story= new Story({
+	// 			creator:req.decoded.id,
+	// 			content:req.body.content
+	// 		});
+	// 		story.save(function(err,newStory){
+	// 			if(err){
+	// 				res.send(err);
+	// 				return;
 
-				}
-				io.emit('story',newStory); 
-				res.json({message:"New Story Created!"});
+	// 			}
+	// 			io.emit('story',newStory); 
+	// 			res.json({message:"New Story Created!"});
 
-			});
-		})
+	// 		});
+	// 	})
 
-		.get(function(req,res){
-			console.log("hello india");
-			Story.find({creator:req.decoded.id},function(err,stories){
-				if(err){
-					res.send(err);
-					return;
-				}
-				res.json(stories);
-			});
-		});
+	// 	.get(function(req,res){
+	// 		console.log("hello india");
+	// 		Story.find({creator:req.decoded.id},function(err,stories){
+	// 			if(err){
+	// 				res.send(err);
+	// 				return;
+	// 			}
+	// 			res.json(stories);
+	// 		});
+	// 	});
 
 	api.get('/me',function(req,res){
 		res.json(req.decoded);
